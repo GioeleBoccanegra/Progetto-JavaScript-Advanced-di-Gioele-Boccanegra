@@ -1,0 +1,73 @@
+/* Stile generale */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Nero scuro per lo sfondo */
+  color: #e0e0e0; /* Grigio chiaro per il testo */
+  line-height: 1.6;
+}
+
+/* Intestazione */
+header {
+  background-color: #1f1f1f; /* Grigio scuro per il background dell'intestazione */
+  color: #ffffff; /* Testo bianco */
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* Contenuto principale */
+main {
+  padding: 2rem;
+}
+
+#articles-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Stile per ogni articolo */
+article {
+  background-color: #1e1e1e; /* Grigio scuro per il card */
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* Contenitore per allineamento orizzontale */
+.news-container {
+  display: flex; /* Usa Flexbox */
+  align-items: center; /* Allinea verticalmente al centro */
+  gap: 20px; /* Spazio tra gli elementi */
+}
+
+.news-container h3,
+.news-container p {
+  margin: 0; /* Rimuovi i margini predefiniti */
+}
+
+.news-container p {
+  color: #b0b0b0; /* Grigio medio per il testo della descrizione */
+}
+
+/* Footer */
+footer {
+  background-color: #1f1f1f; /* Grigio scuro */
+  color: #808080; /* Grigio chiaro */
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
