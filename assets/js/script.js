@@ -20,7 +20,7 @@ async function getHakerNewsId(){
     for (let i = 0 ; i<10;i++){
       const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/"+response.data[i]+".json ")
       console.log(result)
-      console.log(result.data.title + result.data.url)
+      console.log(result.data.title+ " " + result.data.url)
       console.log(convertDate(result.data.time))
     }
   } catch (error) {
