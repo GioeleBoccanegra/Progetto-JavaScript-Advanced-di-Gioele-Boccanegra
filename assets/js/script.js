@@ -16,16 +16,30 @@ function convertiDate(date){
   return dataItaliana
 }
 
-function creaNews(news){
-
+function creaNews(article){
+  let news = document.createElement("article")
+  let newsDataContainer = document.createElement("div")
+  let newsTitle = document.createElement("h2")
+  let newsLink = document.createElement("a")
+  let newsDate = document.createElement("p")
+  newsDataContainer.className="news-container"
+  newsContainer.appendChild(news)
+  news.appendChild(newsDataContainer)
+  newsDataContainer.appendChild(newsTitle)
+  newsDataContainer.appendChild(newsLink)
+  newsDataContainer.appendChild(newsDate)
+  newsTitle.textContent=article.data.title
+  newsLink.textContent="Leggi notizia"
+  newsLink.href=article.data.url
+  newsLink.setAttribute("target", "_blank");
+  newsLink.setAttribute("rel", "noopener noreferrer");
+  newsDate.textContent=convertiDate(article.data.time)
 }
 
 async function getHakersNwsData(response) {
   for (let i = 0 ; i<10;i++){
     const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/"+response.data[i]+".json ")
-    console.log(result)
-    console.log(result.data.title+ " " + result.data.url)
-    console.log(convertiDate(result.data.time))
+    creaNews(result)
   }
 }
 
