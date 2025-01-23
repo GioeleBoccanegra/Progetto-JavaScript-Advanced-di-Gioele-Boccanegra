@@ -123,16 +123,6 @@ button:focus {
   transform: scale(1.05);
 }
 
-/* Footer */
-footer {
-  background-color: #1f1f1f;
-  color: #808080;
-  text-align: center;
-  padding: 1.5rem;
-  font-size: 0.9rem;
-  border-top: 1px solid #333;
-  margin-top: 2rem;
-}
 .news-container h2 {
   color: #f44336; /* Rosso per il messaggio di fine */
   font-size: 1.2rem;
