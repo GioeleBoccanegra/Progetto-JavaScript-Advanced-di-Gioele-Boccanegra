@@ -40,7 +40,7 @@ function newsFinite() {
 function creaNews(articolo) {
   let news = document.createElement("article");
   let newsDataContainer = document.createElement("div");
-  let newsTitle = document.createElement("h2");
+  let newsTitle = document.createElement("h3");
   let newsLink = document.createElement("a");
   let newsDate = document.createElement("p");
   newsDataContainer.className = "news-container";
