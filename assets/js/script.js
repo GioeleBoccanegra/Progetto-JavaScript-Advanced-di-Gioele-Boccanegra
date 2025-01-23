@@ -1,4 +1,6 @@
 const newsContainer = document.querySelector("[data-news-container]")
+const buttonMore = document.querySelector("[data-load-more]");
+let countMore = 0
 
 function convertiDate(date){
   let data = new Date(date * 1000);
@@ -16,7 +18,15 @@ function convertiDate(date){
   return dataItaliana
 }
 
-function creaNews(article){
+function creaLinkNews(article, LinkHtml){
+  LinkHtml.textContent="Leggi notizia"
+  LinkHtml.href=article.data.url
+  LinkHtml.setAttribute("target", "_blank");
+  LinkHtml.setAttribute("rel", "noopener noreferrer");
+
+}
+
+function creaNews(articolo){
   let news = document.createElement("article")
   let newsDataContainer = document.createElement("div")
   let newsTitle = document.createElement("h2")
@@ -28,30 +38,37 @@ function creaNews(article){
   newsDataContainer.appendChild(newsTitle)
   newsDataContainer.appendChild(newsLink)
   newsDataContainer.appendChild(newsDate)
-  newsTitle.textContent=article.data.title
-  newsLink.textContent="Leggi notizia"
-  newsLink.href=article.data.url
-  newsLink.setAttribute("target", "_blank");
-  newsLink.setAttribute("rel", "noopener noreferrer");
-  newsDate.textContent=convertiDate(article.data.time)
+  newsTitle.textContent=articolo.data.title
+  creaLinkNews(articolo, newsLink)
+  newsDate.textContent=convertiDate(articolo.data.time)
 }
 
-async function getHakersNwsData(response) {
+async function getHakersNwsData(response, count) {
   for (let i = 0 ; i<10;i++){
     const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/"+response.data[i]+".json ")
     creaNews(result)
   }
+
+  buttonMore.addEventListener("click", async() => {
+    for (let i = count ; i<count+10;i++){
+      const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/"+response.data[i]+".json ")
+      creaNews(result)
+    }
+    return count+= 10
+  })
 }
 
 
 async function getHakerNewsId(){
   try{
     const response = await axios.get("https://hacker-news.firebaseio.com/v0/newstories.json")
-    console.log(response.data[0]);
-    getHakersNwsData(response)
+    console.log(response)
+    let count = 10
+    getHakersNwsData(response, count)
   } catch (error) {
     console.log(error)
   }
 }
 
 getHakerNewsId()
+
