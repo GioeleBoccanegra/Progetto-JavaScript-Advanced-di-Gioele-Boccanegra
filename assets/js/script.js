@@ -1,6 +1,6 @@
 const newsContainer = document.querySelector("[data-news-container]");
 const buttonMore = document.querySelector("[data-load-more]");
-let countMore = 0;
+let count = 10;
 
 function convertiDate(date) {
   let data = new Date(date * 1000);
@@ -20,9 +20,14 @@ function convertiDate(date) {
 
 function creaLinkNews(article, LinkHtml) {
   LinkHtml.textContent = "Leggi notizia";
-  LinkHtml.href = article.data.url;
-  LinkHtml.setAttribute("target", "_blank");
-  LinkHtml.setAttribute("rel", "noopener noreferrer");
+  if (article.data.url) {
+    LinkHtml.href = article.data.url;
+    LinkHtml.setAttribute("target", "_blank");
+    LinkHtml.setAttribute("rel", "noopener noreferrer");
+  } else {
+    LinkHtml.href = "#";
+    LinkHtml.setAttribute("disabled", "true");
+  }
 }
 
 function newsFinite() {
@@ -33,8 +38,8 @@ function newsFinite() {
   news.appendChild(newsDataContainer);
   let newsEnd = document.createElement("h2");
   newsDataContainer.appendChild(newsEnd);
-  newsEnd.textContent = "Hai visualizzato 500 news, torna più tardi per altre notizie";
-  buttonMore.disabled = true;
+  newsEnd.textContent = "Hai visualizzato tutte le notizie. Torna più tardi!";
+  buttonMore.style.display = 'none'; // Nascondi il pulsante
 }
 
 function creaNews(articolo) {
@@ -54,7 +59,7 @@ function creaNews(articolo) {
   newsDate.textContent = convertiDate(articolo.data.time);
 }
 
-async function getHakersNwsData(response, count) {
+async function getHakersNwsData(response) {
   // Inizializza le prime 10 notizie
   for (let i = 0; i < 10; i++) {
     const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/" + response.data[i] + ".json");
@@ -62,18 +67,20 @@ async function getHakersNwsData(response, count) {
   }
 
   buttonMore.addEventListener("click", async () => {
-    if (buttonMore.disabled) {
-      return;
-    }
+    if (buttonMore.disabled) return;
 
-    // Carica le notizie successive (500 alla volta)
+    // Carica le notizie successive
     for (let i = count; i < count + 10; i++) {
-      const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/" + response.data[i] + ".json");
-      if (result.data) {
-        creaNews(result);
-      } else {
-        newsFinite(); 
-        break;
+      try {
+        const result = await axios.get("https://hacker-news.firebaseio.com/v0/item/" + response.data[i] + ".json");
+        if (result.data) {
+          creaNews(result);
+        } else {
+          newsFinite();
+          break;
+        }
+      } catch (error) {
+        console.error("Error loading news:", error);
       }
     }
     count += 10;
@@ -84,8 +91,7 @@ async function getHakerNewsId() {
   try {
     const response = await axios.get("https://hacker-news.firebaseio.com/v0/newstories.json");
     console.log(response);
-    let count = 10;
-    getHakersNwsData(response, count);
+    getHakersNwsData(response);
   } catch (error) {
     console.log(error);
   }
