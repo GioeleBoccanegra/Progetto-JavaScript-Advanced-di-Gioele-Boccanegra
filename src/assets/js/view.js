@@ -24,8 +24,8 @@ function creaLinkNews(article, LinkHtml) {
   const url = _.get(article, 'url', '#');
   
   if (url === "#" || !url) {
-    LinkHtml.style.pointerEvents = "none";  // Disabilita il click
-    LinkHtml.style.color = "#ccc";  // Cambia colore per indicare che il link è disabilitato
+    LinkHtml.style.pointerEvents = "none";  
+    LinkHtml.style.color = "#ccc";  
   } else {
     LinkHtml.href = url;
     LinkHtml.setAttribute("target", "_blank");
@@ -42,7 +42,7 @@ function newsFinite() {
   let newsEnd = document.createElement("h2");
   newsDataContainer.appendChild(newsEnd);
   newsEnd.textContent = "Hai visualizzato tutte le notizie. Torna più tardi!";
-  buttonMore.style.display = 'none'; // Nascondi il pulsante
+  buttonMore.style.display = 'none'; 
 }
 
 function creaNews(articolo) {
@@ -65,7 +65,6 @@ function creaNews(articolo) {
 }
 
 async function loadNews(response) {
-  // Inizializza le prime 10 notizie
   for (let i = 0; i < 10; i++) {
     const articleData = await getNewsData(response[i]);
     if (articleData) {
@@ -78,11 +77,9 @@ async function loadNews(response) {
   buttonMore.addEventListener("click", async () => {
     if (buttonMore.disabled) return;
 
-    // Disabilita il bottone e mostra "Caricamento..."
     buttonMore.disabled = true;
     buttonMore.textContent = "Caricamento...";
 
-    // Carica le notizie successive
     for (let i = count; i < count + 10; i++) {
       const articleData = await getNewsData(response[i]);
       if (articleData) {
@@ -93,7 +90,6 @@ async function loadNews(response) {
       }
     }
 
-    // Ripristina il bottone
     count += 10;
     buttonMore.disabled = false;
     buttonMore.textContent = "Carica altre notizie";
