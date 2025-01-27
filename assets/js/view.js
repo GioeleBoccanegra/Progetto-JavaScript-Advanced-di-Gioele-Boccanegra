@@ -1,4 +1,4 @@
-import _ from 'https://cdn.jsdelivr.net/npm/lodash-es@4.17.21/lodash.min.js';
+import _ from 'lodash';
 import { getNewsData } from './service.js';
 
 const newsContainer = document.querySelector("[data-news-container]");

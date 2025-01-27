@@ -1,4 +1,4 @@
-import axios from 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js';
+import axios from 'axios';
 
 // Funzione per ottenere gli ID delle notizie nuove
 async function getHackerNewsId() {
