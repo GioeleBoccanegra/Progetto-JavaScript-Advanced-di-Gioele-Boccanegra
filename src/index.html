@@ -12,23 +12,12 @@
 </head>
 <body>
   <header>
-    <h1>Ultimi Articoli Hackesr News</h1>
+    <h1>Ultimi Articoli Hacker News</h1>
   </header>
   <main>
     <section id="articles-container" data-news-container>
     </section>
     <button data-load-more aria-label="Carica altre notizie">LOAD MORE</button>
   </main>
-  <script type="module">
-    import { getHackerNewsId } from '/assets/js/service.js';
-    import { loadNews } from '/assets/js/view.js';
-    
-    async function initialize() {
-      const response = await getHackerNewsId();
-      loadNews(response);
-    }
-    
-    initialize();
-  </script>
 </body>
 </html>
