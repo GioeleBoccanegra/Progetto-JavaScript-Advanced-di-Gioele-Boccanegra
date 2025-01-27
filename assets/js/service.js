@@ -1,3 +1,5 @@
+import axios from 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js';
+
 // Funzione per ottenere gli ID delle notizie nuove
 async function getHackerNewsId() {
   try {
@@ -6,6 +8,7 @@ async function getHackerNewsId() {
   }catch (error) {
     console.error("Errore nel recupero degli ID delle notizie:", error);
     newsContainer.innerHTML = "<h2>Errore nel caricamento delle notizie. Riprova più tardi.</h2>";
+    buttonMore.style.display = 'none';
   }
 }
 

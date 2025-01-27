@@ -23,13 +23,13 @@ function creaLinkNews(article, LinkHtml) {
   LinkHtml.textContent = "Leggi notizia";
   const url = _.get(article, 'url', '#');
   
-  // Verifica se l'URL è valido
-  if (url !== "#" && url) {
+  if (url === "#" || !url) {
+    LinkHtml.style.pointerEvents = "none";  // Disabilita il click
+    LinkHtml.style.color = "#ccc";  // Cambia colore per indicare che il link è disabilitato
+  } else {
     LinkHtml.href = url;
     LinkHtml.setAttribute("target", "_blank");
     LinkHtml.setAttribute("rel", "noopener noreferrer");
-  } else {
-    LinkHtml.setAttribute("disabled", "true");
   }
 }
 
