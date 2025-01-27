@@ -3,8 +3,9 @@ async function getHackerNewsId() {
   try {
     const response = await axios.get("https://hacker-news.firebaseio.com/v0/newstories.json");
     return response.data;  // Restituisce gli ID delle notizie
-  } catch (error) {
+  }catch (error) {
     console.error("Errore nel recupero degli ID delle notizie:", error);
+    newsContainer.innerHTML = "<h2>Errore nel caricamento delle notizie. Riprova più tardi.</h2>";
   }
 }
 

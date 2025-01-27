@@ -22,12 +22,14 @@ function convertiDate(date) {
 function creaLinkNews(article, LinkHtml) {
   LinkHtml.textContent = "Leggi notizia";
   const url = _.get(article, 'url', '#');
-  LinkHtml.href = url;
-  if (url === "#") {
-    LinkHtml.setAttribute("disabled", "true");
-  } else {
+  
+  // Verifica se l'URL è valido
+  if (url !== "#" && url) {
+    LinkHtml.href = url;
     LinkHtml.setAttribute("target", "_blank");
     LinkHtml.setAttribute("rel", "noopener noreferrer");
+  } else {
+    LinkHtml.setAttribute("disabled", "true");
   }
 }
 
