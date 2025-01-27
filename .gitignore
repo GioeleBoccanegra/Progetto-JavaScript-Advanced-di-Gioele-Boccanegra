@@ -1,5 +1,3 @@
 # Node modules
 node_modules/
 
-# Build output (cartella generata da Webpack)
-dist/
